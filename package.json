@@ -3,7 +3,7 @@
   "name": "emulative",
   "displayName": "Emulative",
   "description": "Create mock objects from Typescript types",
-  "icon": "images/icon.png",
+  "icon": "https://res.cloudinary.com/cleanswelllines/image/upload/v1634171291/icon_tb23af.png",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.61.0"

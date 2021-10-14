@@ -10,19 +10,19 @@ You can use Emulative to produce Typescript objects, Json objects or builder fun
 
 ### Copy Typescript objects
 
-![Copy Typescript objects](./images/copyObject.gif)
+![Copy Typescript objects](https://res.cloudinary.com/cleanswelllines/image/upload/v1634171297/copyObject_sargod.gif)
 
 ### Copy Json objects
 
-![Copy Json objects](./images/copyJson.gif)
+![Copy Json objects](https://res.cloudinary.com/cleanswelllines/image/upload/v1634171292/copyJson_are4p6.gif)
 
 ### Create a scratch file with Typescript objects
 
-![Create a scratch file with Typescript objects](./images/scratch.gif)
+![Create a scratch file with Typescript objects](https://res.cloudinary.com/cleanswelllines/image/upload/v1634171293/scratch_a4sqc0.gif)
 
 ### Create a builder function
 
-![Create a builder function](./images/testBuilder.gif)
+![Create a builder function](https://res.cloudinary.com/cleanswelllines/image/upload/v1634171300/testBuilder_y6wo2c.gif)
 
 ---
 
@@ -46,7 +46,7 @@ You can overwrite certain properties on a per workspace basis if you need them t
 - The key and value are delimited by a colon “:”
 - Emulative will override any properties matching the key with the value provided
 
-![Example configuration](./images/configuration.png)
+![Example configuration](https://res.cloudinary.com/cleanswelllines/image/upload/v1634171292/configuration_crf9hc.png)
 
 ---
 
