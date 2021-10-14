@@ -1,70 +1,82 @@
-# emulative README
+# Emulative
 
-This is the README for your extension "emulative". After writing up a brief description, we recommend including the following sections.
+Get mock objects from your Typescript types straight from [Visual Studio Code.](https://code.visualstudio.com/)
+
+---
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+You can use Emulative to produce Typescript objects, Json objects or builder functions from Typescript types:
 
-For example if there is an image subfolder under your extension project workspace:
+### Copy Typescript objects
 
-\!\[feature X\]\(images/feature-x.png\)
+![Copy Typescript objects](./images/copyObject.gif)
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+### Copy Json objects
 
-## Requirements
+![Copy Json objects](./images/copyJson.gif)
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+### Create a scratch file with Typescript objects
+
+![Create a scratch file with Typescript objects](./images/scratch.gif)
+
+### Create a builder function
+
+![Create a builder function](./images/testBuilder.gif)
+
+---
+
+## Usage
+
+To use Emulative:
+
+- Select the identifier of the Typescript type you would like to build a mock for then use shortcut `Ctrl/Cmd + Shift + P` to open the Command Palette
+- Type `Emulative` and the various options for copying the mock type will be presented, select the option you prefer
+- No matter the option selected, the mock type will be copied to the clipboard
+
+---
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+You can overwrite certain properties on a per workspace basis if you need them to be of a specific nature by adding an environmental variable to `launch.json`.
 
-For example:
+- In Visual Studio Code, use shortcut `Ctrl/Cmd + Shift + P` to open the Command Palette and type Open `launch.json`
+- Configure any properties you would like to override in `launch.json` under `configurations.env.emulativePropertyOverrides`
+- Use a string where different key value pairs are delimited by commas “,”
+- The key and value are delimited by a colon “:”
+- Emulative will override any properties matching the key with the value provided
 
-This extension contributes the following settings:
+![Example configuration](./images/configuration.png)
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+---
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+### Type support
+
+Emulative is hugely dependent on the wonderful work from the team who created [intermock](https://github.com/google/intermock). Therefore, the types supported by Emulative match those [supported by intermock](https://github.com/google/intermock#type-support).
+
+### Multiple files
+
+Emulative does not currently support types spread accross multiple files.
+
+---
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
-
 ### 1.0.0
 
-Initial release of ...
+Initial release of Emulative, includes ability to:
 
-### 1.0.1
+- Run Emulative via the Command Palette to produce TS objects, Json objects and builder functions to mock out a TS type
+- Override specific property values
 
-Fixed issue #.
+---
 
-### 1.1.0
+## Acknowledgements
 
-Added features X, Y, and Z.
+Like most software these days, this wouldn't be posssible without all the amazing open source work out there. In particular, this extension relies heavily on the amazing work of the team at [intermock](https://github.com/google/intermock)
 
------------------------------------------------------------------------------------------------------------
-## Following extension guidelines
+---
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+**Created by [John Folder](https://twitter.com/john_folder) at Easy Agile**

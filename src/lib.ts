@@ -2,7 +2,8 @@ import { readFile } from "fs/promises";
 import * as vscode from "vscode";
 import { writeSync } from "clipboardy";
 import { mock as IntermockTS } from "intermock";
-import { filter, map } from "lodash";
+import { window, workspace } from "vscode";
+import { get, isNil } from "lodash";
 
 export type FileTuple = [string, string];
 export type FileTuples = FileTuple[];
@@ -20,9 +21,25 @@ export function readFiles(files: string[]): Promise<FileTuples> {
   });
 }
 
-export const initialiseAndGetData = () => {
+export const initialiseMockProcess = () => {
+  const metaData = getMetadataForMock();
+
+  if (isNil(metaData)) {
+    return;
+  }
+  // Get the mock object
+  const targetObject = buildMock(metaData.path, metaData.interfaceName);
+
+  if (metaData.emulativeOverrides) {
+    applyEmulativeOverrides(metaData.emulativeOverrides, targetObject);
+  }
+
+  return targetObject;
+};
+
+export const getMetadataForMock = () => {
   // Get the active text editor
-  const editor = vscode.window.activeTextEditor;
+  const editor = window.activeTextEditor;
 
   if (editor) {
     const document = editor.document;
@@ -30,33 +47,47 @@ export const initialiseAndGetData = () => {
 
     // Get the word within the selection
     const interfaceName = document.getText(selection);
-    const path = vscode.window.activeTextEditor?.document.fileName;
+    const path = document.fileName;
 
     if (!path) {
-      vscode.window.showErrorMessage("No path found.");
+      window.showErrorMessage("No current file path found.");
       return;
     }
 
     if (!interfaceName) {
-      vscode.window.showErrorMessage("No interface name found.");
+      window.showWarningMessage(
+        "No interface name found. Did you select the whole name?"
+      );
       return;
     }
+
+    // launch.json configuration
+    const config = workspace.getConfiguration("launch", editor.document.uri);
+
+    // retrieve values
+    const configurationValues: any = config.get("configurations");
+
+    const emulativeOverrides =
+      getEmulativePropertyOverrides(configurationValues);
 
     return {
       interfaceName,
       path,
+      emulativeOverrides,
     };
   } else {
-    vscode.window.showErrorMessage("No editor found.");
+    window.showWarningMessage("No editor found.");
   }
 };
 
 export const getTargetObject = (mockObject: any, interfaceName: string) => {
-  return mockObject[interfaceName];
+  return get(mockObject, interfaceName);
 };
 
-export const buildMock = (path: string, interfaceName: string) => {
-  return getMockObject(path, interfaceName);
+export const buildMock = async (path: string, interfaceName: string) => {
+  const mock = await getMockObject(path, interfaceName);
+  const targetObject = getTargetObject(mock, interfaceName);
+  return targetObject;
 };
 
 export const getMockObject = async (path: string, interfaceName: string) => {
@@ -73,13 +104,13 @@ export const getMockObject = async (path: string, interfaceName: string) => {
     return result;
   } catch (err) {
     //@ts-ignore
-    console.log(err.message);
+    window.showWarningMessage(`intermock error: ${err.message}`);
   }
 };
 
 export const createAsBuilder = (
-  interfaceName: string,
-  mockObjectAsString: string
+  mockObjectAsString: string,
+  interfaceName = "Interface"
 ) => {
   return `export const build${interfaceName} = (overrides?: Partial<${interfaceName}>): ${interfaceName} => {
 		const default${interfaceName} = ${mockObjectAsString};
@@ -88,16 +119,16 @@ export const createAsBuilder = (
 	};`;
 };
 
-export const createAsVariable = (
-  interfaceName: string,
-  mockObjectAsString: string
-) => {
-  const objectIdentifierWithPreferredCase =
-    "const " +
-    interfaceName[0].toLowerCase() +
-    interfaceName.slice(1) +
-    "Mock = ";
-  return objectIdentifierWithPreferredCase + mockObjectAsString + ";";
+export const getInterfaceName = () => {
+  const editor = window.activeTextEditor;
+
+  if (editor) {
+    const document = editor.document;
+    const selection = editor.selection;
+
+    // Get the word within the selection
+    return document.getText(selection);
+  }
 };
 
 export const copyToClipboard = (mock: string) => {
@@ -139,20 +170,6 @@ export const getEmulativePropertyOverrides = (
   });
 };
 
-export const sendResultToTerminal = (mockObject: any) => {
-  let terminalToUse = vscode.window.activeTerminal;
-  // eslint-disable-next-line eqeqeq
-  if (terminalToUse == null) {
-    let NEXT_TERM_ID = 1;
-    terminalToUse = vscode.window.createTerminal(
-      `Ext Terminal #${NEXT_TERM_ID++}`
-    );
-  }
-
-  terminalToUse.show();
-  terminalToUse.sendText(`echo ${mockObject}`);
-};
-
 export const mutateObjectProperty = (prop: string, value: string, obj: any) => {
   obj.constructor === Object &&
     Object.keys(obj).forEach((key) => {
@@ -175,4 +192,32 @@ export const applyEmulativeOverrides = (
       mutateObjectProperty(prop, value, targetObject);
     });
   }
+};
+
+export const createAsVariable = (mockObjectAsString: string) => {
+  const interfaceName = getInterfaceName() || "Interface";
+  const objectIdentifierWithPreferredCase =
+    "const " +
+    interfaceName[0].toLowerCase() +
+    interfaceName.slice(1) +
+    "Mock = ";
+  return objectIdentifierWithPreferredCase + mockObjectAsString + ";";
+};
+
+const getAllTypescriptFiles = async () => {
+  return await vscode.workspace.findFiles("**/*.ts*", "**/node_modules/**");
+};
+
+export const sendResultToTerminal = (mockObject: any) => {
+  let terminalToUse = vscode.window.activeTerminal;
+  // eslint-disable-next-line eqeqeq
+  if (terminalToUse == null) {
+    let NEXT_TERM_ID = 1;
+    terminalToUse = vscode.window.createTerminal(
+      `Ext Terminal #${NEXT_TERM_ID++}`
+    );
+  }
+
+  terminalToUse.show();
+  terminalToUse.sendText(`echo ${mockObject}`);
 };

@@ -1,7 +1,9 @@
 {
+  "publisher": "johnFolder",
   "name": "emulative",
   "displayName": "Emulative",
   "description": "Create mock objects from Typescript types",
+  "icon": "images/icon.png",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.61.0"
