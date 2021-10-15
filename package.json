@@ -6,6 +6,9 @@
   "description": "Create mocks from Typescript types",
   "icon": "images/icon.png",
   "version": "0.0.1",
+  "author": {
+    "name": "John Folder"
+  },
   "engines": {
     "vscode": "^1.40.0"
   },
@@ -86,5 +89,10 @@
     "fs-readfile-promise": "^3.0.1",
     "intermock": "^0.2.5",
     "lodash": "^4.17.21"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Easy-Agile/emulative.git"
+  },
+  "homepage": "https://github.com/Easy-Agile/emulative/blob/main/README.md"
 }
