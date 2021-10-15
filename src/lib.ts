@@ -93,6 +93,7 @@ export const getMockObject = async (path: string, interfaceName: string) => {
       interfaces: [interfaceName],
       isFixedMode: false,
       output: "object",
+      isOptionalAlwaysEnabled: true,
     }) as string;
 
     return result;
