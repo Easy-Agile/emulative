@@ -61,14 +61,8 @@ export const getMetadataForMock = () => {
       return;
     }
 
-    // launch.json configuration
-    const config = workspace.getConfiguration("launch", editor.document.uri);
-
-    // retrieve values
-    const configurationValues: any = config.get("configurations");
-
     const emulativeOverrides =
-      getEmulativePropertyOverrides(configurationValues);
+      getEmulativePropertyOverrides();
 
     return {
       interfaceName,
@@ -154,19 +148,16 @@ export const convertToJSObjectAsString = (obj: any) => {
   });
 };
 
-export const getEmulativePropertyOverrides = (
-  configurationVariablesArray: any[]
-) => {
-  const configurationVariables = configurationVariablesArray[0];
-  const emulativePropertyOverridesString: string =
-    configurationVariables?.env?.emulativePropertyOverrides;
+export const getEmulativePropertyOverrides = () => {
+  const emulativePropertyOverrides: any =
+    workspace.getConfiguration().get("emulative.propOverrides")
 
-  if (!emulativePropertyOverridesString) {
+  if (!emulativePropertyOverrides) {
     return;
   }
   const individualPropertiesandValues =
-    emulativePropertyOverridesString.split(",");
-  return individualPropertiesandValues.map((propValue) => {
+    emulativePropertyOverrides.split(",");
+  return individualPropertiesandValues.map((propValue: any) => {
     const substrings = propValue.split(":");
     return {
       [substrings[0]]: substrings[1],

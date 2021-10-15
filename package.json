@@ -19,6 +19,16 @@
   ],
   "main": "./dist/extension.js",
   "contributes": {
+    "configuration": {
+      "title": "Emulative",
+      "properties": {
+        "emulative.propOverrides": {
+          "type": "string",
+          "description": "Overwrite mock properties in Emulative",
+          "examples": ["startDate:2012-09-27,id:12345"]
+        }
+      }
+    },
     "commands": [
       {
         "command": "emulative.copyObject",

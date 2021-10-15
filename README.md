@@ -38,15 +38,13 @@ To use Emulative:
 
 ## Extension Settings
 
-You can overwrite certain properties on a per workspace basis if you need them to be of a specific nature by adding an environmental variable to `launch.json`.
+You can overwrite certain properties by updating the Prop Overrides setting under `Settings > Extensions > Emulative > Prop Overrides`
 
-- In Visual Studio Code, use shortcut `Ctrl/Cmd + Shift + P` to open the Command Palette and type Open `launch.json`
-- Configure any properties you would like to override in `launch.json` under `configurations.env.emulativePropertyOverrides`
-- Use a string where different key value pairs are delimited by commas “,”
+- Enter key value pairs where different key value pairs are delimited by commas “,”
 - The key and value are delimited by a colon “:”
 - Emulative will override any properties matching the key with the value provided
 
-![Example configuration](https://res.cloudinary.com/cleanswelllines/image/upload/v1634171292/configuration_crf9hc.png)
+![Example configuration](https://res.cloudinary.com/cleanswelllines/image/upload/v1634263767/configuration_a4sypv.png)
 
 ---
 
