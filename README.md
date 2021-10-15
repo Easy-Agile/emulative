@@ -1,6 +1,6 @@
 # Emulative
 
-Get mock objects from your Typescript types straight from [Visual Studio Code.](https://code.visualstudio.com/)
+Mock your Typescript types straight from [Visual Studio Code.](https://code.visualstudio.com/)
 
 ---
 
@@ -58,13 +58,13 @@ Emulative is hugely dependent on the wonderful work from the team who created [i
 
 ### Multiple files
 
-Emulative does not currently support types spread accross multiple files.
+Emulative does not currently support types spread across multiple files.
 
 ---
 
 ## Release Notes
 
-### 1.0.0
+### 0.0.1
 
 Initial release of Emulative, includes ability to:
 
@@ -77,6 +77,8 @@ Initial release of Emulative, includes ability to:
 
 Like most software these days, this wouldn't be posssible without all the amazing open source work out there. In particular, this extension relies heavily on the amazing work of the team at [intermock](https://github.com/google/intermock)
 
+Also, thanks to [Easy Agile](https://www.easyagile.com/) for giving me the time, space, encouragement and tools to work on this extension. Come [work for us!](https://www.easyagile.com/careers/)
+
 ---
 
-**Created by [John Folder](https://twitter.com/john_folder) at Easy Agile**
+**Created by [John Folder](https://twitter.com/john_folder) at [Easy Agile](https://www.easyagile.com/)**

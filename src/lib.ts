@@ -21,14 +21,14 @@ export function readFiles(files: string[]): Promise<FileTuples> {
   });
 }
 
-export const initialiseMockProcess = () => {
+export const initialiseMockProcess = async () => {
   const metaData = getMetadataForMock();
 
   if (isNil(metaData)) {
     return;
   }
   // Get the mock object
-  const targetObject = buildMock(metaData.path, metaData.interfaceName);
+  const targetObject = await buildMock(metaData.path, metaData.interfaceName);
 
   if (metaData.emulativeOverrides) {
     applyEmulativeOverrides(metaData.emulativeOverrides, targetObject);
@@ -132,7 +132,7 @@ export const getInterfaceName = () => {
 };
 
 export const copyToClipboard = (mock: string) => {
-  writeSync(mock);
+  vscode.env.clipboard.writeText(mock);
 };
 
 export const createScratchFile = (mock: string) => {
@@ -160,6 +160,10 @@ export const getEmulativePropertyOverrides = (
   const configurationVariables = configurationVariablesArray[0];
   const emulativePropertyOverridesString: string =
     configurationVariables?.env?.emulativePropertyOverrides;
+
+  if (!emulativePropertyOverridesString) {
+    return;
+  }
   const individualPropertiesandValues =
     emulativePropertyOverridesString.split(",");
   return individualPropertiesandValues.map((propValue) => {

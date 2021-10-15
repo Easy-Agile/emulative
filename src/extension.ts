@@ -41,6 +41,7 @@ export function activate(context: vscode.ExtensionContext) {
         );
       } catch (error: any) {
         console.error(error.message);
+        vscode.window.showErrorMessage(error.message);
       }
     }
   );
@@ -72,6 +73,7 @@ export function activate(context: vscode.ExtensionContext) {
         );
       } catch (error: any) {
         console.error(error.message);
+        vscode.window.showErrorMessage(error.message);
       }
     }
   );
@@ -100,6 +102,7 @@ export function activate(context: vscode.ExtensionContext) {
         );
       } catch (error: any) {
         console.error(error.message);
+        vscode.window.showErrorMessage(error.message);
       }
     }
   );
@@ -136,6 +139,7 @@ export function activate(context: vscode.ExtensionContext) {
         );
       } catch (error: any) {
         console.error(error.message);
+        vscode.window.showErrorMessage(error.message);
       }
     }
   );

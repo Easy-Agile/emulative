@@ -3,10 +3,10 @@
   "name": "emulative",
   "displayName": "Emulative",
   "description": "Create mock objects from Typescript types",
-  "icon": "https://res.cloudinary.com/cleanswelllines/image/upload/v1634171291/icon_tb23af.png",
+  "icon": "images/icon.png",
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.61.0"
+    "vscode": "^1.40.0"
   },
   "categories": [
     "Other"
@@ -54,7 +54,7 @@
     "@types/glob": "^7.1.4",
     "@types/mocha": "^9.0.0",
     "@types/node": "14.x",
-    "@types/vscode": "^1.61.0",
+    "@types/vscode": "^1.40.0",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
     "@vscode/test-electron": "^1.6.2",
