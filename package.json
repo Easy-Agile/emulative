@@ -1,8 +1,9 @@
 {
-  "publisher": "johnFolder",
+  "publisher": "easyagile",
+  "license": "SEE LICENSE IN LICENSE.txt",
   "name": "emulative",
   "displayName": "Emulative",
-  "description": "Create mock objects from Typescript types",
+  "description": "Create mocks from Typescript types",
   "icon": "images/icon.png",
   "version": "0.0.1",
   "engines": {
@@ -25,7 +26,9 @@
         "emulative.propOverrides": {
           "type": "string",
           "description": "Overwrite mock properties in Emulative",
-          "examples": ["startDate:2012-09-27,id:12345"]
+          "examples": [
+            "startDate:2012-09-27,id:12345"
+          ]
         }
       }
     },
