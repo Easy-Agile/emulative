@@ -124,8 +124,9 @@ export function activate(context: vscode.ExtensionContext) {
         const mockObjectAsString = convertToJSObjectAsString(targetObject);
 
         const interfaceName = getInterfaceName();
-
+        
         const builderFunctionAsString = createAsBuilder(
+          targetObject,
           mockObjectAsString,
           interfaceName
         );
