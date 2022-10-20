@@ -37,7 +37,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         // Notify user
         vscode.window.showInformationMessage(
-          `Mock object copied to the clipboard: ${mockObjectAsString}`
+          `Mock object copied to the clipboard`
         );
       } catch (error: any) {
         console.error(error.message);
@@ -69,7 +69,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         // Notify user
         vscode.window.showInformationMessage(
-          `Scratch file with mock object created: ${objectAsVariableString}`
+          `Scratch file with mock object created`
         );
       } catch (error: any) {
         console.error(error.message);
@@ -98,7 +98,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         // Notify user
         vscode.window.showInformationMessage(
-          `Mock JSON object copied to the clipboard: ${mockObjectStringified}`
+          `Mock JSON object copied to the clipboard`
         );
       } catch (error: any) {
         console.error(error.message);
@@ -123,7 +123,7 @@ export function activate(context: vscode.ExtensionContext) {
         const mockObjectAsString = stringifyObject(targetObject);
 
         const interfaceName = getInterfaceName();
-        
+
         const builderFunctionAsString = createAsBuilder(
           targetObject,
           mockObjectAsString,
@@ -135,7 +135,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         // Notify user
         vscode.window.showInformationMessage(
-          `builder function for a mock object of type ${interfaceName} copied to the clipboard: ${builderFunctionAsString}`
+          `builder function for a mock object of type ${interfaceName} copied to the clipboard`
         );
       } catch (error: any) {
         console.error(error.message);
