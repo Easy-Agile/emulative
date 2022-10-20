@@ -1,8 +1,10 @@
 import { readFile } from "fs/promises";
 import * as vscode from "vscode";
 import { window, workspace } from "vscode";
-import { get, isNil } from "lodash";
+import { get, isEmpty, isNil } from "lodash";
 import { mock } from "./easy-agile-intermock/intermock";
+import * as nodePath from "path";
+import * as fs from 'fs';
 
 export type FileTuple = [string, string];
 export type FileTuples = FileTuple[];
@@ -82,19 +84,67 @@ export const buildMock = async (path: string, interfaceName: string) => {
   return targetObject;
 };
 
+const getInterfaceImportedFile = async (files: FileTuples, interfaceName: string) => {
+  // Find the import statement corresponding to interfaceName
+  const checkForImport = new RegExp('^import');
+  const fileName = files[0][0];
+  const fileData = files[0][1].split('\n').filter(x => checkForImport.test(x));
+  const checkForInterface = new RegExp("\\b" + interfaceName + "\\b");
+  const interfaceImportStatement = fileData.find(x => checkForInterface.test(x));
+  const interfaceImportStatementArray = interfaceImportStatement?.split(' ');
+  if (!interfaceImportStatementArray) {
+    return;
+  }
+
+  // Build the absolute path to the interface based on the import statement
+  const interfaceRelativePath = interfaceImportStatementArray[(interfaceImportStatementArray.length - 1)].replace(/;|"/g, "");
+  const interfaceFileName = interfaceRelativePath.split('/')[(interfaceRelativePath.split('/')).length - 1];
+  const absolutePath = nodePath.dirname(fileName)
+  const interfaceAbsolutePath = nodePath.resolve(absolutePath, interfaceRelativePath);
+  const interfaceAbsolutePathDirectory = nodePath.dirname(interfaceAbsolutePath)
+  const interfaceFileNameWithExtension = fs.readdirSync(interfaceAbsolutePathDirectory, { withFileTypes: true })
+    .filter(item => !item.isDirectory())
+    .map(item => item.name)
+    .find(item => item.includes(interfaceFileName))
+  if (!interfaceFileNameWithExtension) {
+    return;
+  }
+
+  // Get mock from file
+  const externalFiles = await readFiles([nodePath.join(interfaceAbsolutePathDirectory, interfaceFileNameWithExtension)]);
+  return externalFiles;
+}
+
 export const getMockObject = async (path: string, interfaceName: string) => {
   try {
+
     const files = await readFiles([path]);
 
+    // Try to get mock from current file
+    // If empty, search through other files using getInterfaceImportedFile()
     const result = mock({
-      files,
+      files: files,
       interfaces: [interfaceName],
       isFixedMode: false,
       output: "object",
       isOptionalAlwaysEnabled: true,
     }) as string;
 
-    return result;
+    if (!isEmpty(result)) {
+      return result;
+    }
+
+    const externalFiles = await getInterfaceImportedFile(files, interfaceName);
+
+    const externalFileResult = mock({
+      files: externalFiles,
+      interfaces: [interfaceName],
+      isFixedMode: false,
+      output: "object",
+      isOptionalAlwaysEnabled: true,
+    }) as string;
+
+    return externalFileResult;
   } catch (err) {
     //@ts-ignore
     window.showWarningMessage(`intermock error: ${err.message}`);
@@ -103,8 +153,8 @@ export const getMockObject = async (path: string, interfaceName: string) => {
 
 const createTsDoc = (targetObject: string) => {
   // Remove newline characters if the value is a string
-  const inputs = Object.entries(targetObject).map((x) => ` * ${x[0]}: "${typeof(x[1]) === 'string' ? x[1].replace(/(\r\n|\n|\r)/gm, "") : x[1]}",\n`)
-    return `
+  const inputs = Object.entries(targetObject).map((x) => ` * ${x[0]}: "${typeof (x[1]) === 'string' ? x[1].replace(/(\r\n|\n|\r)/gm, "") : x[1]}",\n`)
+  return `
 /**
  * Default values are:\n * \`\`\`\n * {\n${inputs.join('')} *  }\n * \`\`\`\n */
   `

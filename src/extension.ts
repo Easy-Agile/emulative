@@ -32,7 +32,7 @@ export function activate(context: vscode.ExtensionContext) {
 
         const mockObjectAsString = stringifyObject(targetObject);
 
-        // copy to clipboard
+        // Copy to clipboard
         copyToClipboard(mockObjectAsString);
 
         // Notify user
