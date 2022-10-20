@@ -3,7 +3,6 @@
 import * as vscode from "vscode";
 import { Commands } from "./constants";
 import {
-  convertToJSObjectAsString,
   copyToClipboard,
   createAsBuilder,
   createScratchFile,
@@ -11,6 +10,7 @@ import {
   getInterfaceName,
   createAsVariable,
 } from "./lib";
+import stringifyObject from "stringify-object";
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -30,7 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
           return;
         }
 
-        const mockObjectAsString = convertToJSObjectAsString(targetObject);
+        const mockObjectAsString = stringifyObject(targetObject);
 
         // copy to clipboard
         copyToClipboard(mockObjectAsString);
@@ -59,7 +59,7 @@ export function activate(context: vscode.ExtensionContext) {
           return;
         }
 
-        const mockObjectAsString = convertToJSObjectAsString(targetObject);
+        const mockObjectAsString = stringifyObject(targetObject);
 
         const objectAsVariableString = createAsVariable(mockObjectAsString);
         // copy to clipboard
@@ -120,8 +120,7 @@ export function activate(context: vscode.ExtensionContext) {
           return;
         }
 
-        //@ts-ignore
-        const mockObjectAsString = convertToJSObjectAsString(targetObject);
+        const mockObjectAsString = stringifyObject(targetObject);
 
         const interfaceName = getInterfaceName();
 

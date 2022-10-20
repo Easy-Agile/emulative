@@ -1,9 +1,8 @@
 import { readFile } from "fs/promises";
 import * as vscode from "vscode";
-import { writeSync } from "clipboardy";
-import { mock as IntermockTS } from "intermock";
 import { window, workspace } from "vscode";
 import { get, isNil } from "lodash";
+import { mock } from "./easy-agile-intermock/intermock";
 
 export type FileTuple = [string, string];
 export type FileTuples = FileTuple[];
@@ -61,8 +60,7 @@ export const getMetadataForMock = () => {
       return;
     }
 
-    const emulativeOverrides =
-      getEmulativePropertyOverrides();
+    const emulativeOverrides = getEmulativePropertyOverrides();
 
     return {
       interfaceName,
@@ -88,7 +86,7 @@ export const getMockObject = async (path: string, interfaceName: string) => {
   try {
     const files = await readFiles([path]);
 
-    const result = IntermockTS({
+    const result = mock({
       files,
       interfaces: [interfaceName],
       isFixedMode: false,
@@ -141,23 +139,15 @@ export const createScratchFile = (mock: string) => {
     .then((document) => vscode.window.showTextDocument(document));
 };
 
-export const convertToJSObjectAsString = (obj: any) => {
-  let cleaned = JSON.stringify(obj, null, 2);
-
-  return cleaned.replace(/^[\t ]*"[^:\n\r]+(?<!\\)":/gm, function (match) {
-    return match.replace(/"/g, "");
-  });
-};
-
 export const getEmulativePropertyOverrides = () => {
-  const emulativePropertyOverrides: any =
-    workspace.getConfiguration().get("emulative.propOverrides")
+  const emulativePropertyOverrides: any = workspace
+    .getConfiguration()
+    .get("emulative.propOverrides");
 
   if (!emulativePropertyOverrides) {
     return;
   }
-  const individualPropertiesandValues =
-    emulativePropertyOverrides.split(",");
+  const individualPropertiesandValues = emulativePropertyOverrides.split(",");
   return individualPropertiesandValues.map((propValue: any) => {
     const substrings = propValue.split(":");
     return {
