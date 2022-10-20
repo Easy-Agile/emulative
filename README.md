@@ -62,7 +62,15 @@ Emulative does not currently support types spread across multiple files.
 
 ## Release Notes
 
-### 0.0.1
+### 1.0.0
+
+v1 release of Emulative, includes:
+
+- Better handling of unsupported types to produce a mock object with stubs instead of throwing an error
+- Document builder functions with TSDoc describing their default values
+- Fix the poorly formatted user toast notifications
+
+### 0.1.0
 
 Initial release of Emulative, includes ability to:
 
