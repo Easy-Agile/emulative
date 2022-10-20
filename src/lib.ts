@@ -104,8 +104,9 @@ export const getMockObject = async (path: string, interfaceName: string) => {
 };
 
 const createTsDoc = (targetObject: string) => {
-  const inputs = Object.entries(targetObject).map((x) => ` * ${x[0]}: "${x[1]}",\n`)
-  return `
+  // Remove newline characters if the value is a string
+  const inputs = Object.entries(targetObject).map((x) => ` * ${x[0]}: "${typeof(x[1]) === 'string' ? x[1].replace(/(\r\n|\n|\r)/gm, "") : x[1]}",\n`)
+    return `
 /**
  * Default values are:\n * \`\`\`\n * {\n${inputs.join('')} *  }\n * \`\`\`\n */
   `
