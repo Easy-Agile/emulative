@@ -87,4 +87,4 @@ Also, thanks to [Easy Agile](https://www.easyagile.com/) for giving me the time,
 
 ---
 
-**Created by [John Folder](https://twitter.com/john_folder) at [Easy Agile](https://www.easyagile.com/)**
+**Created by [John Folder](https://twitter.com/john_folder) and [Conor Gould](https://www.linkedin.com/in/conorgould/) at [Easy Agile](https://www.easyagile.com/)**
