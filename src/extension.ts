@@ -35,10 +35,6 @@ export function activate(context: vscode.ExtensionContext) {
         // Copy to clipboard
         copyToClipboard(mockObjectAsString);
 
-        // Notify user
-        vscode.window.showInformationMessage(
-          `Mock object copied to the clipboard`
-        );
       } catch (error: any) {
         console.error(error.message);
         vscode.window.showErrorMessage(error.message);
@@ -67,10 +63,6 @@ export function activate(context: vscode.ExtensionContext) {
 
         createScratchFile(objectAsVariableString);
 
-        // Notify user
-        vscode.window.showInformationMessage(
-          `Scratch file with mock object created`
-        );
       } catch (error: any) {
         console.error(error.message);
         vscode.window.showErrorMessage(error.message);
@@ -96,10 +88,6 @@ export function activate(context: vscode.ExtensionContext) {
         // copy to clipboard
         copyToClipboard(mockObjectStringified);
 
-        // Notify user
-        vscode.window.showInformationMessage(
-          `Mock JSON object copied to the clipboard`
-        );
       } catch (error: any) {
         console.error(error.message);
         vscode.window.showErrorMessage(error.message);
@@ -133,10 +121,6 @@ export function activate(context: vscode.ExtensionContext) {
         // copy to clipboard
         copyToClipboard(builderFunctionAsString);
 
-        // Notify user
-        vscode.window.showInformationMessage(
-          `builder function for a mock object of type ${interfaceName} copied to the clipboard`
-        );
       } catch (error: any) {
         console.error(error.message);
         vscode.window.showErrorMessage(error.message);
@@ -148,4 +132,4 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {}
+export function deactivate() { }
