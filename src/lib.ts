@@ -218,7 +218,11 @@ export const getEmulativePropertyOverrides = () => {
 };
 
 export const mutateObjectProperty = (prop: string, value: string, obj: any) => {
-  obj.constructor === Object &&
+  if (isNil(obj)) {
+    return;
+  }
+
+  obj?.constructor === Object &&
     Object.keys(obj).forEach((key) => {
       if (key === prop) {
         obj[key] = value;
