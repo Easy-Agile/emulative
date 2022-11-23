@@ -2,6 +2,9 @@
   "publisher": "easyagile",
   "license": "SEE LICENSE IN LICENSE.txt",
   "name": "emulative",
+  "jest": {
+    "verbose": true
+  },
   "displayName": "Emulative",
   "description": "Helps developers speed up testing by creating mock objects representing TypeScript types",
   "icon": "images/icon.png",

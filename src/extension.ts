@@ -10,7 +10,7 @@ import {
   createAsVariable,
 } from "./lib";
 import stringifyObject from "stringify-object";
-import { createAsBuilder } from "./helpers";
+import { createAsBuilder } from "./lib";
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed

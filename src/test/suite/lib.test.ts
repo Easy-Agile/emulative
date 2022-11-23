@@ -1,4 +1,4 @@
-import { createTsDoc } from "../../helpers";
+import { createTsDoc } from "../../lib";
 
 describe("createTsDoc", () => {
     it("should add a TS Document to a string", () => {
