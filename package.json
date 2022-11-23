@@ -12,6 +12,9 @@
   "engines": {
     "vscode": "^1.40.0"
   },
+  "galleryBanner": {
+    "color": "E55BFF"
+  },
   "categories": [
     "Programming Languages",
     "Other",

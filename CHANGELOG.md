@@ -13,7 +13,8 @@ v1 release of Emulative, includes:
 
 - Better handling of unsupported types to produce a mock object with stubs instead of throwing an error
 - Document builder functions with TSDoc describing their default values
-- Fix the poorly formatted user toast notifications
+- Remove user toast notifications for a successful user action
+- Security updates
 
 ## [0.1.0] - 2021-10-15
 
