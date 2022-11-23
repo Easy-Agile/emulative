@@ -4,13 +4,13 @@ import * as vscode from "vscode";
 import { Commands } from "./constants";
 import {
   copyToClipboard,
-  createAsBuilder,
   createScratchFile,
   initialiseMockProcess,
   getInterfaceName,
   createAsVariable,
 } from "./lib";
 import stringifyObject from "stringify-object";
+import { createAsBuilder } from "./helpers";
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
