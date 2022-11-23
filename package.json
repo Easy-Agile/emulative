@@ -3,7 +3,7 @@
   "license": "SEE LICENSE IN LICENSE.txt",
   "name": "emulative",
   "displayName": "Emulative",
-  "description": "Create mocks from Typescript types",
+  "description": "Helps developers speed up testing by creating mock objects representing TypeScript types",
   "icon": "images/icon.png",
   "version": "1.0.0",
   "author": {
@@ -15,7 +15,14 @@
   "categories": [
     "Programming Languages",
     "Other",
-    "Snippets"
+    "Snippets",
+    "Testing"
+  ],
+  "keywords": [
+    "Typescript",
+    "Testing",
+    "Mocking",
+    "Productivity"
   ],
   "activationEvents": [
     "onCommand:emulative.copyObject",
@@ -96,6 +103,10 @@
   "resolutions": {
     "minimatch": "^3.0.5",
     "minimist": "1.2.6"
+  },
+  "bugs": {
+    "url": "https://github.com/Easy-Agile/emulative/issues",
+    "email": "john.folder@easyagile.com"
   },
   "repository": {
     "type": "git",

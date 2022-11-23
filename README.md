@@ -1,6 +1,6 @@
 # Emulative
 
-Mock your Typescript types straight from [Visual Studio Code.](https://code.visualstudio.com/)
+Emulative is a VSCode extension which helps developers speed up testing by creating mock objects representing TypeScript types straight from [Visual Studio Code.](https://code.visualstudio.com/)
 
 ---
 
@@ -52,11 +52,11 @@ You can overwrite certain properties by updating the Prop Overrides setting unde
 
 ### Type support
 
-Emulative is hugely dependent on the wonderful work from the team who created [intermock](https://github.com/google/intermock). Therefore, the types supported by Emulative match those [supported by intermock](https://github.com/google/intermock#type-support).
+Emulative is hugely dependent on the wonderful work from the team who created [intermock](https://github.com/google/intermock). Therefore, the types supported by Emulative match those [supported by intermock](https://github.com/google/intermock#type-support). If Emulative encounters a type it isn't able to handle it will try and create a stub where possible or ignore the type completely. We are hoping to improve the types handled by Emulative in future releases.
 
 ### Multiple files
 
-Emulative does not currently support types spread across multiple files.
+Emulative is able to produce a mock type from a type which is defined in another file at one level. However, it does not currently support types with references to other types which are spread across multiple files. We are hoping to address this limitation in the next release.
 
 ---
 
@@ -68,7 +68,8 @@ v1 release of Emulative, includes:
 
 - Better handling of unsupported types to produce a mock object with stubs instead of throwing an error
 - Document builder functions with TSDoc describing their default values
-- Fix the poorly formatted user toast notifications
+- Remove user toast notifications for a successful user action
+- Security updates
 
 ### 0.1.0
 
@@ -83,7 +84,7 @@ Initial release of Emulative, includes ability to:
 
 Like most software these days, this wouldn't be posssible without all the amazing open source work out there. In particular, this extension relies heavily on the amazing work of the team at [intermock](https://github.com/google/intermock)
 
-Also, thanks to [Easy Agile](https://www.easyagile.com/) for giving me the time, space, encouragement and tools to work on this extension. Come [work for us!](https://www.easyagile.com/careers/)
+Also, thanks to [Easy Agile](https://www.easyagile.com/) for giving us the time, space, encouragement and tools to work on this extension. Come [work for us!](https://www.easyagile.com/careers/)
 
 ---
 
