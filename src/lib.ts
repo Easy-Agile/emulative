@@ -15,15 +15,17 @@ export const createTsDoc = (targetObject: any) => {
   return `
 /**
  * Default values are:\n * \`\`\`\n * {\n${inputs.join('')} *  }\n * \`\`\`\n */
-  `
-}
+  `;
+};
 
 export const createAsBuilder = (
   targetObject: any,
   mockObjectAsString: string,
   interfaceName = "Interface"
 ) => {
-  const tSDoc = createTsDoc(targetObject);
+  // Check if a user has turned off comments and if so do not add them
+  const addJsdocCommentToBuilderFunction = getEmulativeAddJSDocToBuilderFunction();
+  const tSDoc = addJsdocCommentToBuilderFunction ? createTsDoc(targetObject) : "";
   return `${tSDoc} export const build${interfaceName} = (overrides?: Partial<${interfaceName}>): ${interfaceName} => {
         const default${interfaceName} = ${mockObjectAsString};
 
@@ -68,8 +70,12 @@ export const getMetadataForMock = () => {
     const document = editor.document;
     const selection = editor.selection;
 
+    const range = document.getWordRangeAtPosition(
+      selection.active,
+    );
+
     // Get the word within the selection
-    const interfaceName = document.getText(selection);
+    const interfaceName = document.getText(range);
     const path = document.fileName;
 
     if (!path) {
@@ -180,8 +186,12 @@ export const getInterfaceName = () => {
     const document = editor.document;
     const selection = editor.selection;
 
+    const range = document.getWordRangeAtPosition(
+      selection.active,
+    );
+
     // Get the word within the selection
-    return document.getText(selection);
+    return document.getText(range);
   }
 };
 
@@ -203,7 +213,7 @@ export const createScratchFile = (mock: string) => {
 export const getEmulativePropertyOverrides = () => {
   const emulativePropertyOverrides: any = workspace
     .getConfiguration()
-    .get("emulative.propOverrides");
+    .get("emulative.propertyOverrides");
 
   if (!emulativePropertyOverrides) {
     return;
@@ -215,6 +225,18 @@ export const getEmulativePropertyOverrides = () => {
       [substrings[0]]: substrings[1],
     };
   });
+};
+
+/**
+ * Has a user opted to have JSDoc comments added to the builder function?
+ * @returns boolean | undefined
+ */
+export const getEmulativeAddJSDocToBuilderFunction = () => {
+  const addDocoToBuilderFunction: boolean | undefined = workspace
+    .getConfiguration()
+    .get("emulative.addJsdocCommentToBuilderFunction");
+
+  return addDocoToBuilderFunction;
 };
 
 export const mutateObjectProperty = (prop: string, value: string, obj: any) => {
