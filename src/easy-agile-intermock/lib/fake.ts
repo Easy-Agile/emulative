@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import faker from 'faker';
-import {fixedData} from './fixed-data';
+import { fixedData } from './fixed-data';
 
 /**
  * Wrapper for Faker, or any mocking framework
@@ -24,5 +24,8 @@ export function fake(mockType: string, isFixedMode = false) {
     return fixedData[mockType];
   }
 
+  // faker.fake is deprecated and will be removed in the future
+  // see https://fakerjs.dev/api/fake.html#fake
+  // & https://fakerjs.dev/api/helpers.html#fake for the replacement method definition
   return faker.fake(`{{${mockType}}}`);
 }

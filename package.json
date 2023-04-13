@@ -49,6 +49,12 @@
             "startDate:2012-09-27,id:12345"
           ]
         },
+        "emulative.maxSentenceLength": {
+          "type": "integer",
+          "description": "Maximum amount of words for generated string types.",
+          "default": 10,
+          "minimum": 3
+        },
         "emulative.addJsdocCommentToBuilderFunction": {
           "title": "Add JSDoc comment to builder function",
           "type": "boolean",
@@ -78,14 +84,14 @@
     "menus": {
       "editor/context": [
         {
-        "when": "resourceLangId == typescript",
-        "command": "emulative.copyObject",
-        "group": "6_copypath"
+          "when": "resourceLangId == typescript",
+          "command": "emulative.copyObject",
+          "group": "6_copypath"
         },
         {
-        "when": "resourceLangId == typescript",
-        "command": "emulative.copyTestDataBuilder",
-        "group": "6_copypath"
+          "when": "resourceLangId == typescript",
+          "command": "emulative.copyTestDataBuilder",
+          "group": "6_copypath"
         }
       ]
     }

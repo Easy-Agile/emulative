@@ -246,6 +246,22 @@ export const getEmulativePropertyOverrides = () => {
   });
 };
 
+/** @returns a random number from 3 to the user selected or default number (10), inclusive, for the sentance length */
+export const getEmulativeSentanceLength = () => {
+  const emulativeSentenceLength: any = workspace
+    .getConfiguration()
+    .get("emulative.maxSentenceLength");
+
+  // Return the default value if not set for some reason
+  if (!emulativeSentenceLength || emulativeSentenceLength < 3) {
+    return 10;
+  }
+
+  // minimum number of words in a sentence
+  let minWords = 3;
+  return Math.floor(Math.random() * (emulativeSentenceLength - minWords + 1) + minWords);
+};
+
 /**
  * Has a user opted to have JSDoc comments added to the builder function?
  * @returns boolean | undefined
