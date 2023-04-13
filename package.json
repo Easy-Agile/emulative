@@ -38,12 +38,19 @@
     "configuration": {
       "title": "Emulative",
       "properties": {
-        "emulative.propOverrides": {
+        "emulative.propertyOverrides": {
+          "title": "Property overrides",
           "type": "string",
           "description": "Overwrite mock properties in Emulative",
           "examples": [
             "startDate:2012-09-27,id:12345"
           ]
+        },
+        "emulative.addJsdocCommentToBuilderFunction": {
+          "title": "Add JSDoc comment to builder function",
+          "type": "boolean",
+          "description": "Include comment in generated builder function",
+          "default": true
         }
       }
     },

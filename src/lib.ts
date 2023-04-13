@@ -165,7 +165,8 @@ export const createAsBuilder = (
   mockObjectAsString: string,
   interfaceName = "Interface"
 ) => {
-  const tSDoc = createTsDoc(targetObject);
+  const addTSDoc = getEmulativeAddJSDocToBuilderFunction();
+  const tSDoc = addTSDoc ? createTsDoc(targetObject) : '';
   return `${tSDoc} export const build${interfaceName} = (overrides?: Partial<${interfaceName}>): ${interfaceName} => {
 		const default${interfaceName} = ${mockObjectAsString};
 
@@ -203,7 +204,7 @@ export const createScratchFile = (mock: string) => {
 export const getEmulativePropertyOverrides = () => {
   const emulativePropertyOverrides: any = workspace
     .getConfiguration()
-    .get("emulative.propOverrides");
+    .get("emulative.propertyOverrides");
 
   if (!emulativePropertyOverrides) {
     return;
@@ -215,6 +216,18 @@ export const getEmulativePropertyOverrides = () => {
       [substrings[0]]: substrings[1],
     };
   });
+};
+
+/**
+ * Has a user opted to have JSDoc comments added to the builder function?
+ * @returns boolean | undefined
+ */
+export const getEmulativeAddJSDocToBuilderFunction = () => {
+  const addDocoToBuilderFunction: boolean | undefined = workspace
+    .getConfiguration()
+    .get("emulative.addJsdocCommentToBuilderFunction");
+
+  return addDocoToBuilderFunction;
 };
 
 export const mutateObjectProperty = (prop: string, value: string, obj: any) => {
