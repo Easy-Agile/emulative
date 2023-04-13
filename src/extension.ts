@@ -8,6 +8,8 @@ import {
   initialiseMockProcess,
   getInterfaceName,
   createAsVariable,
+  addToInvocationCount,
+  displayRatingMessageOrUpdateInvocationCount,
 } from "./lib";
 import stringifyObject from "stringify-object";
 import { createAsBuilder } from "./lib";
@@ -35,6 +37,7 @@ export function activate(context: vscode.ExtensionContext) {
         // Copy to clipboard
         copyToClipboard(mockObjectAsString);
 
+        displayRatingMessageOrUpdateInvocationCount(context);
       } catch (error: any) {
         console.error(error.message);
         vscode.window.showErrorMessage(error.message);
@@ -63,6 +66,8 @@ export function activate(context: vscode.ExtensionContext) {
 
         createScratchFile(objectAsVariableString);
 
+        displayRatingMessageOrUpdateInvocationCount(context);
+
       } catch (error: any) {
         console.error(error.message);
         vscode.window.showErrorMessage(error.message);
@@ -87,6 +92,8 @@ export function activate(context: vscode.ExtensionContext) {
 
         // copy to clipboard
         copyToClipboard(mockObjectStringified);
+
+        displayRatingMessageOrUpdateInvocationCount(context);
 
       } catch (error: any) {
         console.error(error.message);
@@ -120,6 +127,8 @@ export function activate(context: vscode.ExtensionContext) {
 
         // copy to clipboard
         copyToClipboard(builderFunctionAsString);
+
+        displayRatingMessageOrUpdateInvocationCount(context);
 
       } catch (error: any) {
         console.error(error.message);
