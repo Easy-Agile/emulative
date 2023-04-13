@@ -5,6 +5,7 @@ import { get, isEmpty, isNil } from "lodash";
 import { mock } from "./easy-agile-intermock/intermock";
 import * as nodePath from "path";
 import * as fs from 'fs';
+import { INVOCATION_COUNT, INVOCATION_COUNT_THRESHOLD } from "./constants";
 
 export type FileTuple = [string, string];
 export type FileTuples = FileTuple[];
@@ -294,3 +295,51 @@ export const sendResultToTerminal = (mockObject: any) => {
   terminalToUse.show();
   terminalToUse.sendText(`echo ${mockObject}`);
 };
+
+export const clearInvocationCount = (context: vscode.ExtensionContext) => {
+  context.globalState.update(INVOCATION_COUNT, 0);
+};
+
+export const getInvocationCount = (context: vscode.ExtensionContext): number => {
+  return context.globalState.get(INVOCATION_COUNT) || 0;
+};
+
+export const addToInvocationCount = (context: vscode.ExtensionContext) => {
+  const currentCount: number = getInvocationCount(context);
+  context.globalState.update(INVOCATION_COUNT, currentCount + 1);
+};
+
+export const shouldDisplayRatingMessage = (context: vscode.ExtensionContext) => {
+  const currentCount: number = getInvocationCount(context);
+  if (currentCount === INVOCATION_COUNT_THRESHOLD) {
+    return true;
+  }
+  return false;
+};
+
+export const displayRatingMessageOrUpdateInvocationCount = (context: vscode.ExtensionContext) => {
+  addToInvocationCount(context);
+
+  if (shouldDisplayRatingMessage(context)) {
+    window.showInformationMessage(
+      "Thanks for using Intermock! If you like it, please consider rating it on the VS Code marketplace. Otherwise, please let us know how we can improve it.",
+      "Rate it now",
+      "Give feedback",
+      "No thanks"
+    ).then((selection) => {
+      if (selection === "Rate it now") {
+        vscode.env.openExternal(vscode.Uri.parse('https://marketplace.visualstudio.com/items?itemName=EasyAgile.emulative&ssr=false#review-details'));
+      }
+      if (selection === "Give feedback") {
+        vscode.env.openExternal(vscode.Uri.parse('https://github.com/Easy-Agile/emulative/issues'));
+      }
+      if (selection === "No thanks") {
+        // close the vscode information message
+        vscode.commands.executeCommand('workbench.action.closeMessages');
+      }
+    });
+  }
+
+  // clearInvocationCount(context);
+};
+
