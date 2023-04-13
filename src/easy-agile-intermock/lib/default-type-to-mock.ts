@@ -15,6 +15,7 @@
  */
 import ts from "typescript";
 import { fake } from "./fake";
+import { getEmulativeSentanceLength } from "../../lib";
 
 export const supportedPrimitiveTypes: { [key: string]: boolean } = {
   [ts.SyntaxKind.NumberKeyword]: true,
@@ -31,7 +32,7 @@ export const defaultTypeToMock: {
   [ts.SyntaxKind.NumberKeyword]: (isFixedMode = false) =>
     parseInt(fake("random.number", isFixedMode) as string, 10),
   [ts.SyntaxKind.StringKeyword]: (isFixedMode = false) =>
-    fake("lorem.text", isFixedMode),
+    fake(`lorem.sentence(${getEmulativeSentanceLength()})`, isFixedMode),
   [ts.SyntaxKind.BooleanKeyword]: (isFixedMode = false) =>
     JSON.parse(fake("random.boolean", isFixedMode) as string),
   [ts.SyntaxKind.ObjectKeyword]: (isFixedMode = false) => {

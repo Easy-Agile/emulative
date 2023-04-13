@@ -110,8 +110,26 @@ export const getTargetObject = (mockObject: any, interfaceName: string) => {
 export const buildMock = async (path: string, interfaceName: string) => {
   const mock = await getMockObject(path, interfaceName);
   const targetObject = getTargetObject(mock, interfaceName);
-  return targetObject;
+  const reducedMock = cleanMockIds(targetObject);
+  return reducedMock;
 };
+
+
+const cleanMockIds = (mockObject: any) => {
+  //reads through mock object properties and identifies any keys that end with Id
+  //reduces the value of those properties to a string of length 2
+  try {
+    const mockObjectEntries = Object.entries(mockObject);
+    mockObjectEntries.forEach((entry) => {
+      if (entry[0].endsWith("Id") || entry[0].endsWith("ID")) {
+        mockObject[entry[0]] = mockObject[entry[0]].toString().slice(0, 2);
+      }
+    });
+    return mockObject;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 const getInterfaceImportedFile = async (files: FileTuples, interfaceName: string) => {
   // Find the import statement corresponding to interfaceName
@@ -226,6 +244,22 @@ export const getEmulativePropertyOverrides = () => {
       [substrings[0]]: substrings[1],
     };
   });
+};
+
+/** @returns a random number from 3 to the user selected or default number (10), inclusive, for the sentance length */
+export const getEmulativeSentanceLength = () => {
+  const emulativeSentenceLength: any = workspace
+    .getConfiguration()
+    .get("emulative.maxSentenceLength");
+
+  // Return the default value if not set for some reason
+  if (!emulativeSentenceLength || emulativeSentenceLength < 3) {
+    return 10;
+  }
+
+  // minimum number of words in a sentence
+  let minWords = 3;
+  return Math.floor(Math.random() * (emulativeSentenceLength - minWords + 1) + minWords);
 };
 
 /**
