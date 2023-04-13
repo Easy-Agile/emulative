@@ -5,7 +5,7 @@ import { get, isEmpty, isNil } from "lodash";
 import { mock } from "./easy-agile-intermock/intermock";
 import * as nodePath from "path";
 import * as fs from 'fs';
-import { INVOCATION_COUNT, INVOCATION_COUNT_THRESHOLD } from "./constants";
+import { ID_FORMAT, INVOCATION_COUNT, INVOCATION_COUNT_THRESHOLD } from "./constants";
 
 export type FileTuple = [string, string];
 export type FileTuples = FileTuple[];
@@ -118,11 +118,29 @@ export const buildMock = async (path: string, interfaceName: string) => {
 const cleanMockIds = (mockObject: any) => {
   //reads through mock object properties and identifies any keys that end with Id
   //reduces the value of those properties to a string of length 2
+  const idType: ID_FORMAT | undefined = workspace
+    .getConfiguration()
+    .get("emulative.idMockType");
+
+  console.log(idType)
   try {
     const mockObjectEntries = Object.entries(mockObject);
     mockObjectEntries.forEach((entry) => {
+      if (typeof entry[1] === "number")
+        return;
+
       if (entry[0].endsWith("Id") || entry[0].endsWith("ID")) {
-        mockObject[entry[0]] = mockObject[entry[0]].toString().slice(0, 2);
+        switch (String(idType)) {
+          case "Letter":
+            mockObject[entry[0]] = mockObject[entry[0]].toString().slice(0, 2);
+            break;
+          case "Full":
+            mockObject[entry[0]] = `${mockObject[entry[0]].toString().slice(0, 2)}-${Math.floor(Math.random() * 100)}`;
+            break;
+          case "Number":
+            mockObject[entry[0]] = `${Math.floor(Math.random() * 100)}`;
+            break;
+        }
       }
     });
     return mockObject;

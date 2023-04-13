@@ -60,6 +60,17 @@
           "type": "boolean",
           "description": "Include comment in generated builder function",
           "default": true
+        },
+        "emulative.idMockType":{
+          "title": "Id mock type",
+          "type": "string",
+          "description": "Type of id to use in mocks",
+          "default": "Letter",
+          "enum": [
+            "Letter",
+            "Number",
+            "Full"
+          ]
         }
       }
     },
