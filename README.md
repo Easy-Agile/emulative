@@ -31,20 +31,25 @@ You can use Emulative to produce Typescript objects, Json objects or builder fun
 To use Emulative:
 
 - Select the identifier of the Typescript type you would like to build a mock for then use shortcut `Ctrl/Cmd + Shift + P` to open the Command Palette
-- Type `Emulative` and the various options for copying the mock type will be presented, select the option you prefer
-- No matter the option selected, the mock type will be copied to the clipboard
+  - Type `Emulative` and the various options for copying the mock type will be presented, select the option you prefer
+  - No matter the option selected, the mock type will be copied to the clipboard
+- Or right click on a type in a `.ts` file
+  - Then click the Emulative action you wish to perform
 
 ---
 
 ## Extension Settings
 
-You can overwrite certain properties by updating the Prop Overrides setting under `Settings > Extensions > Emulative > Prop Overrides`
+There are several options avaliable to customise Emulative under `Settings > Extensions > Emulative`
+- `Property Overrides` - overwrite certain properties by updating the setting
+  - Enter key value pairs where different key value pairs are delimited by commas “,”
+  - The key and value are delimited by a colon “:”
+  - Emulative will override any properties matching the key with the value provided
+- `Max Sentence Length` - the maximum amount of words for generated string types. Randomised from 3 to 10 (default) or user set value
+- `Add JSDoc comment to builder function` - if a JSDoc comment should be included above builder functions 
 
-- Enter key value pairs where different key value pairs are delimited by commas “,”
-- The key and value are delimited by a colon “:”
-- Emulative will override any properties matching the key with the value provided
+![Example configuration](https://user-images.githubusercontent.com/97081028/231682831-5ac6dd56-b83e-4aab-9aa6-b58bcada47e1.png)
 
-![Example configuration](https://res.cloudinary.com/cleanswelllines/image/upload/v1634263767/configuration_a4sypv.png)
 
 ---
 

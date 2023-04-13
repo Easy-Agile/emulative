@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2023-04-13
+
+### Added
+
+v1.0.1 of Emulative, new features include:
+
+- Option to toggle JSDoc comment being generated above the builder function
+- Customisable max length for generated string values
+- Object properties containing 'id' are now shorter
+- Right clicking on a type now has Emulate context actions for `.ts` files
+
+
 ## [1.0.0] - 2022-11-23
 
 ### Added
