@@ -23,7 +23,9 @@ export const createAsBuilder = (
   mockObjectAsString: string,
   interfaceName = "Interface"
 ) => {
-  const tSDoc = createTsDoc(targetObject);
+  // Check if a user has turned off comments and if so do not add them
+  const addJsdocCommentToBuilderFunction = getEmulativeAddJSDocToBuilderFunction();
+  const tSDoc = addJsdocCommentToBuilderFunction ? createTsDoc(targetObject) : "";
   return `${tSDoc} export const build${interfaceName} = (overrides?: Partial<${interfaceName}>): ${interfaceName} => {
         const default${interfaceName} = ${mockObjectAsString};
 
