@@ -70,8 +70,12 @@ export const getMetadataForMock = () => {
     const document = editor.document;
     const selection = editor.selection;
 
+    const range = document.getWordRangeAtPosition(
+      selection.active,
+    );
+
     // Get the word within the selection
-    const interfaceName = document.getText(selection);
+    const interfaceName = document.getText(range);
     const path = document.fileName;
 
     if (!path) {
@@ -182,8 +186,12 @@ export const getInterfaceName = () => {
     const document = editor.document;
     const selection = editor.selection;
 
+    const range = document.getWordRangeAtPosition(
+      selection.active,
+    );
+
     // Get the word within the selection
-    return document.getText(selection);
+    return document.getText(range);
   }
 };
 
