@@ -67,7 +67,21 @@
         "command": "emulative.copyTestDataBuilder",
         "title": "Emulate (Copy testDataBuilder function to clipboard)"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+        "when": "resourceLangId == typescript",
+        "command": "emulative.copyObject",
+        "group": "6_copypath"
+        },
+        {
+        "when": "resourceLangId == typescript",
+        "command": "emulative.copyTestDataBuilder",
+        "group": "6_copypath"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run package",
