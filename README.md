@@ -10,19 +10,19 @@ You can use Emulative to produce Typescript objects, Json objects or builder fun
 
 ### Copy Typescript objects
 
-![Copy Typescript objects](https://res.cloudinary.com/cleanswelllines/image/upload/v1634171297/copyObject_sargod.gif)
+![Copy Typescript objects](https://res.cloudinary.com/cleanswelllines/image/upload/v1634171297/copyObject_thux5f.gif)
 
 ### Copy Json objects
 
-![Copy Json objects](https://res.cloudinary.com/cleanswelllines/image/upload/v1634171292/copyJson_are4p6.gif)
+![Copy Json objects](https://res.cloudinary.com/cleanswelllines/image/upload/v1634171292/copyJson_ba5cvh.gif)
 
 ### Create a scratch file with Typescript objects
 
-![Create a scratch file with Typescript objects](https://res.cloudinary.com/cleanswelllines/image/upload/v1634171293/scratch_a4sqc0.gif)
+![Create a scratch file with Typescript objects](https://res.cloudinary.com/cleanswelllines/image/upload/v1634171293/copyScratch_vxv81l.gif)
 
 ### Create a builder function
 
-![Create a builder function](https://res.cloudinary.com/cleanswelllines/image/upload/v1634171300/testBuilder_y6wo2c.gif)
+![Create a builder function](https://res.cloudinary.com/cleanswelllines/image/upload/v1634171300/copyBuilder_bfur4w.gif)
 
 ---
 
