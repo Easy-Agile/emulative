@@ -41,15 +41,15 @@ To use Emulative:
 ## Extension Settings
 
 There are several options avaliable to customise Emulative under `Settings > Extensions > Emulative`
+
 - `Property Overrides` - overwrite certain properties by updating the setting
   - Enter key value pairs where different key value pairs are delimited by commas “,”
   - The key and value are delimited by a colon “:”
   - Emulative will override any properties matching the key with the value provided
 - `Max Sentence Length` - the maximum amount of words for generated string types. Randomised from 3 to 10 (default) or user set value
-- `Add JSDoc comment to builder function` - if a JSDoc comment should be included above builder functions 
+- `Add JSDoc comment to builder function` - if a JSDoc comment should be included above builder functions
 
 ![Example configuration](https://user-images.githubusercontent.com/97081028/231682831-5ac6dd56-b83e-4aab-9aa6-b58bcada47e1.png)
-
 
 ---
 
@@ -66,6 +66,14 @@ Emulative is able to produce a mock type from a type which is defined in another
 ---
 
 ## Release Notes
+
+### 1.1.0
+
+v1.1.0 release of Emulative, includes:
+
+- Implement a max length for strings
+- Optional builder function comments
+- Able to right click to initiate Emulative
 
 ### 1.0.0
 
@@ -93,4 +101,4 @@ Also, thanks to [Easy Agile](https://www.easyagile.com/) for giving us the time,
 
 ---
 
-**Created by [John Folder](https://www.linkedin.com/in/john-folder-385318165/), [Conor Gould](https://www.linkedin.com/in/conorgould/), [Anthony Suker](hhttps://www.linkedin.com/in/anthony-suker/) and [David Sirotich](https://www.linkedin.com/in/david-sirotich/) at [Easy Agile](https://www.easyagile.com/)**
+**Created by [John Folder](https://www.linkedin.com/in/john-folder-385318165/) with contributions by [Conor Gould](https://www.linkedin.com/in/conorgould/), [Anthony Suker](hhttps://www.linkedin.com/in/anthony-suker/) and [David Sirotich](https://www.linkedin.com/in/david-sirotich/) at [Easy Agile](https://www.easyagile.com/)**
